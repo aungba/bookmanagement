@@ -1,0 +1,20 @@
+jwt-secret: javainuse
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/bookmanagement
+    username: bookadmin
+    password: adminbookadmin
+  jpa:
+    database: postgresql    hibernate:      ddl-auto: create
+    properties:      hibernate:
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    database-platform: org.hibernate.dialect.PostgreSQL9Dialect
+  flyway:    enabled: true
+server:  error:
+    include-stacktrace: never
+    
+mybatis:
+  type-aliases-package: com.bookmanagement.entity
+  mapper-locations:  - classpath*:/mybatis/*-mapper.xml

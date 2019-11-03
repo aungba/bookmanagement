@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bookmanagement.dao.BookLoanDao">
+	<resultMap id="BookLoanResultMap"
+		type="com.bookmanagement.entity.BookLoan">
+		<id property="bookloan_id" column="bookloan_id" />
+		<result property="rent_date" column="rent_date" />
+		<result property="due_date" column="due_date" />
+		<result property="is_loan" column="is_loan" />
+		<association property="user" column="user_id"
+			javaType="com.bookmanagement.entity.UserInfo">
+			<id property="id" column="login_id" />
+			<result property="username" column="username" />
+			<result property="password" column="password" />
+			<result property="email" column="email" />
+			<result property="gender" column="gender" />
+			<association property="role" column="role_id"
+				javaType="com.bookmanagement.entity.UserRole">
+				<id property="role_id" column="role_id" />
+				<result property="role_name" column="name" />
+				<result property="role_description" column="description" />
+			</association>
+			<association property="address" column="address_id"
+				javaType="com.bookmanagement.entity.UserAddress">
+				<id property="address_id" column="address_id" />
+				<result property="address" column="address" />
+				<result property="city" column="city" />
+				<result property="country" column="country" />
+				<result property="postalCode" column="postal_code" />
+			</association>
+		</association>
+		<association property="book" column="book_id"
+			javaType="com.bookmanagement.entity.Book">
+			<id column="book_id" property="book_id" />
+			<result column="title" property="title" />
+			<result column="author" property="author" />
+			<result column="publisher" property="publisher" />
+			<result column="summary" property="summary" />
+			<result column="status" property="status" />
+			<result column="isAvailable" property="isAvailable" />
+			<result column="release_date" property="release_date" />
+			<result column="rent_date" property="rent_date" />
+			<association property="category" column="category_id"
+				javaType="com.bookmanagement.entity.Category">
+				<id property="category_id" column="category_id" />
+				<result property="category_txt" column="category_txt" />
+			</association>
+		</association>
+	</resultMap>
+
+	<select id="getBookLoanCountByUserId" resultType="int">
+		select count(*)
+		from bookloan where user_id=#{user_id} and
+		is_loan=#{is_loan}
+	</select>
+
+	<insert id="addLoan"
+		parameterType="com.bookmanagement.entity.BookLoan">
+		insert into bookLoan(user_id, book_id, rent_date,
+		due_date, is_loan)
+		values (#{user.id}, #{book.book_id}, #{rent_date},
+		#{due_date}, #{is_loan})
+	</insert>
+
+	<update id="changeLoanState"
+		parameterType="com.bookmanagement.entity.BookLoan">
+		update bookloan set is_loan = #{loan} where
+		user_id =
+		#{user_id} and
+		book_id = #{book_id} and
+		is_loan = #{loan_state}
+	</update>
+
+	<select id="getBookLoanByBookId"  resultMap="BookLoanResultMap">
+		select * from
+		bookloan as BL
+		inner join
+		(select * from userinfo as U
+		inner join
+		userrole as Ur
+		on U.role_id = Ur.role_id
+		inner join
+		useraddress Uadd
+		on U.address_id = Uadd.address_id) as Us
+		on BL.user_id = Us.login_id
+		inner join
+		(select * from book as B
+		inner join category as C
+		on B.category_id = C.category_id) as BOOK
+		on BL.book_id = BOOK.book_id
+		 where
+		BL.book_id = #{book_id} and BL.is_loan = #{loan_state}
+	</select>
+	
+	<select id="getOverDueDate" resultMap="BookLoanResultMap">
+		select * from bookloan where due_date > #{due_date} and is_loan = #{loan_state}
+	</select>
+</mapper>

@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bookmanagement.dao.UserInfoDao">
+	<resultMap id="userResultMap"
+		type="com.bookmanagement.entity.UserInfo">
+		<id property="id" column="login_id" />
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+		<result property="email" column="email" />
+		<result property="gender" column="gender" />
+		<association property="role" column="role_id"
+			javaType="com.bookmanagement.entity.UserRole">
+			<id property="role_id" column="id" />
+			<result property="role_name" column="name" />
+			<result property="role_description" column="description" />
+		</association>
+		<association property="address" column="address_id"
+			javaType="com.bookmanagement.entity.UserAddress">
+			<id property="address_id" column="id" />
+			<result property="address" column="address" />
+			<result property="city" column="city" />
+			<result property="country" column="country" />
+			<result property="postalCode" column="postal_code" />
+		</association>
+	</resultMap>
+
+	<select id="findByUsername" parameterType="String"
+		resultMap="userResultMap">
+		select * from userInfo as U inner join
+		userRole as R on R.role_id = U.role_id
+		inner join userAddress as A on A.address_id = U.address_id		
+		where U.username=#{username}
+	</select>
+
+	<insert id="registerUser"
+		parameterType="com.bookmanagement.entity.UserInfo">
+		insert into userInfo (username, password, email, gender, role_id, address_id)
+		values (#{username}, #{password}, #{email}, #{gender}, #{role.role_id}, #{address.address_id})
+	</insert>
+	
+	<select id="getUserList" resultMap="userResultMap">
+		select * from userInfo as U inner join
+		userRole as R on R.role_id = U.role_id
+		inner join userAddress as A on A.address_id = U.address_id	
+	</select>
+	
+</mapper>

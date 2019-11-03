@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+	PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.bookmanagement.dao.BookDao">
+
+	<resultMap id="BookResultMap"
+		type="com.bookmanagement.entity.Book">
+		<id column="book_id" property="book_id" />
+		<result column="title" property="title" />
+		<result column="author" property="author" />
+		<result column="publisher" property="publisher" />
+		<result column="summary" property="summary" />
+		<result column="status" property="status" />
+		<result column="isAvailable" property="isAvailable" />
+		<result column="release_date" property="release_date" />
+		<result column="rent_date" property="rent_date" />
+		<association property="category" column="category_id"
+			javaType="com.bookmanagement.entity.Category">
+			<id property="category_id" column="category_id" />
+			<result property="category_txt" column="category_txt" />
+		</association>
+	</resultMap>
+
+	<select id="getAllBookList" resultMap="BookResultMap"
+		parameterType="com.bookmanagement.entity.Book">
+		select *
+		from book as B inner join category as C on
+		C.category_id
+		= B.category_id
+	</select>
+
+	<select id="getBookById" resultMap="BookResultMap">
+		select * from book as B inner
+		join category as C on C.category_id = B.category_id
+		WHERE
+		book_id=#{book_id}
+	</select>
+
+	<insert id="addBook"
+		parameterType="com.bookmanagement.entity.Book">
+		insert into book (title, author, publisher, summary,
+		status, isAvailable, release_date, rent_date, category_id)
+		values
+		(#{title}, #{author}, #{publisher}, #{summary}, #{status},
+		#{isAvailable}, #{release_date}, #{rent_date}, #{category.category_id})
+	</insert>
+
+	<update id="updateBook"
+		parameterType="com.bookmanagement.entity.Book">
+		update book set
+		title = #{title},
+		author = #{author},
+		publisher = #{publisher},
+		summary = #{summary},
+		status = #{status},
+		isAvailable = #{isAvailable},
+		release_date = #{release_date},
+		rent_date
+		= #{rent_date},
+		category_id = #{category.category_id}
+		where book_id = #{book_id}
+	</update>
+
+	<delete id="deleteBook" parameterType="int">
+		delete from book where
+		book_id
+		= #{book_id} and isAvailable = #{isAvailable}
+	</delete>
+
+	<update id="updateBookState"
+		parameterType="com.bookmanagement.entity.Book">
+		update book set
+		status = #{status},
+		rent_date =
+		#{rent_date}
+		where book_id = #{book_id}
+	</update>
+
+	<select id="searchBook" resultMap="BookResultMap"
+		parameterType="com.bookmanagement.entity.Book">
+		select *
+		from book as B inner join category as C on
+		C.category_id
+		=
+		B.category_id
+		<trim prefix="WHERE" prefixOverrides="AND |OR ">
+			<if test="book.title != null">
+				<bind name="title" value="'%' + book.title + '%'" />
+				B.title like #{book.title}
+			</if>
+			<if test="book.author != null">
+				<bind name="author" value="'%' + book.author + '%'" />
+				and B.author like #{author}
+			</if>
+			<if test="book.publisher != null">
+				<bind name="publisher" value="'%' + book.publisher + '%'" />
+				and B.publisher like #{book.publisher}
+			</if>
+			<if test="book.category.category_id > 0">
+				and B.category_id = #{book.category.category_id}
+			</if>
+			<if test="book_status != null">
+				and B.status = #{status}
+			</if>
+			<if test="book.isAvailable != null">
+				and B.isAvailable = #{book.isAvailable}
+			</if>
+		</trim>
+
+	</select>
+
+</mapper>
