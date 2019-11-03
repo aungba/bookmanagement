@@ -6,12 +6,13 @@
 ### Client(Angular) ###
 * Angular 7 + Angular material
   #### Env Set up ###
+  * IDE - Vistudio Studio Code
   * intall node.js latest version
   * go to client project folder and run `npm init`
-
   
   
 ### Server(Springboot) ###
+* IDE - Eclipse
 * DB migration - flyway
 * BD connection and query - mybatis
 * For entity - lombok
