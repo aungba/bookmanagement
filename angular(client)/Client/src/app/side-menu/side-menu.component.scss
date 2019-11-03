@@ -1,0 +1,49 @@
+.app_containter{
+    display: flex;
+    flex-direction: column;
+}
+.header {
+    background: #673ab7;
+}
+
+h3{
+    color: white;
+    margin-left: 3%;
+}
+
+.mat-drawer-container {
+    height: 91vh;
+}
+
+.mat-drawer {
+    width: 9%;
+    // background: #673ab7;
+    background-color: dimgray;
+    border-top: 1px solid white;
+}
+
+.menu-item {
+    color: white;
+    background-color: dimgrey;
+    height: 8%;
+    width: 100%;
+}
+.white-space {
+    border: 0.5px solid white;
+}
+
+.user-icon {
+    background-color: dimgrey;
+    text-align: center;
+    height: 180px;;
+}
+
+.user {
+    color: white;
+}
+
+.pos-btn {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+}

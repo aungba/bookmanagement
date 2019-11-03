@@ -1,0 +1,23 @@
+.full-width {
+    width: 90%;
+}
+
+.delete-btn[disabled] {
+    background-color: #ff000063;
+    color: white;
+    cursor: not-allowed;
+}
+
+.delete-btn {
+    background-color: red;
+    color: white;
+}
+
+.error-msg {
+    height: 30px;
+    margin-bottom: 10px;
+    width: 90%;
+    background-color: #e60846;
+    padding-top: 10px;
+    padding-left: 10px;
+}

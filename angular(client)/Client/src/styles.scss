@@ -1,0 +1,26 @@
+/* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "~font-awesome/css/font-awesome.css";
+@import '../node_modules/flatpickr/dist/flatpickr.min.css';
+
+body {
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-content: stretch;
+    align-items: stretch;
+    height: 100vh;
+}
+.mat-dialog-container {
+    padding-top: 0 !important;
+    padding-right: 0 !important;
+    overflow: hidden !important;
+}
+// app-root{
+//     order: 0;
+//     flex: 1 1 auto;
+//     align-self: auto;
+//     display: block;
+//     background: red;
+// }

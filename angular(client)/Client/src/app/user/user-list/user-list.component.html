@@ -1,0 +1,52 @@
+<div class="userlist-container">
+  <h3>UserList</h3>
+  <button mat-raised-button color="primary" (click)="showRegiser()">Register</button>
+  <mat-card class="userlist-card">
+    <mat-table [dataSource]="dataSource" matSort>
+      <ng-container matColumnDef="id">
+        <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.id}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="name">
+        <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <a routerLink="{{element.id}}">{{element.username}}</a> 
+        </mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="mail">
+        <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="group">
+        <mat-header-cell *matHeaderCellDef> Group </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.address}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="phone">
+        <mat-header-cell *matHeaderCellDef> Phone </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.address}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="role">
+        <mat-header-cell *matHeaderCellDef> Authority </mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.gender === true ? 'Male' : 'Female'}}</mat-cell>
+      </ng-container>
+
+      <ng-container matColumnDef="operation">
+        <mat-header-cell *matHeaderCellDef> Operation </mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <button mat-raised-button color="primary">Edit</button>
+          <a mat-raised-button color="primary" [routerLink]="['/login']">Delete</a>
+        </mat-cell>
+      </ng-container>
+
+      <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+      <mat-row *matRowDef="let element; columns: displayedColumns"></mat-row>
+    </mat-table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+
+  </mat-card>
+</div>

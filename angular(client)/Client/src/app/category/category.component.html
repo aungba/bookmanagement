@@ -1,0 +1,27 @@
+<button mat-raised-button color="primary" (click)="register()">Register</button>
+<mat-card class="cat-card">
+  <mat-table [dataSource]="dataSource">
+    
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef>No.</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.category_id}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.category_txt}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="operation">
+      <mat-header-cell *matHeaderCellDef>Operation</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <button mat-raised-button color="primary" (click)="edit(element.category_id)">Edit</button>
+        <button mat-raised-button color="primary" (click)="delete(element.category_id)">Delete</button>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let element; columns: displayedColumns"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</mat-card>

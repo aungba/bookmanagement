@@ -1,0 +1,104 @@
+<!-- <mat-card class="register-card"> -->
+<span class="close-btn">
+  <fa name="far fa-window-close" size="2x" class="close" (click)="closeDialog()"></fa>
+</span>
+<h3 mat-dialog-title>User Register</h3>
+<mat-dialog-content>
+  <form [formGroup]="registerForm" (ngSubmit)="save()">
+    <table>
+      <tr>
+        <td class="vertical-line">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Username" formControlName="username" [(ngModel)]="user.username" name="username">
+            <mat-error *ngIf="registerForm.controls['username'].errors">
+              <span>Username is required</span>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Phone number" formControlName="phone" [(ngModel)]="user.phone_number" name="phone_number">
+            <mat-error *ngIf="registerForm.controls['phone'].errors">
+              <span>Phone is required</span>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="vertical-line">
+          <mat-form-field class="full-width">
+            <input matInput type="email" placeholder="Email" formControlName="mail" [(ngModel)]="user.email" name="email">
+            <mat-error *ngIf="registerForm.controls['mail'].errors">
+              <span>Email is required</span>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <div class="full-width">
+            <label>Gender :</label>
+            <mat-radio-group [(ngModel)]="user.gender" name="gender" formControlName="gender">
+              <mat-radio-button *ngFor="let gender of genderList" [value]="gender.id" >
+                {{gender.value}}
+              </mat-radio-button>
+            </mat-radio-group>
+            <mat-error *ngIf="registerForm.controls['gender'].errors">
+              <span>Gender is required</span>
+            </mat-error>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="vertical-line">
+          <mat-form-field class="full-width">
+            <input matInput type="number" placeholder="age" formControlName="age" [(ngModel)]="user.age" name="age">
+            <mat-error *ngIf="registerForm.controls['age'].errors">
+              <span>Age is required</span>
+            </mat-error>
+          </mat-form-field>
+        </td>
+
+        <td>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="nrc" formControlName="nrc" [(ngModel)]="user.nrc" name="nrc">
+            <mat-error *ngIf="registerForm.controls['nrc'].errors">
+              <span>nrc is required</span>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="vertical-line">
+          <mat-form-field class="full-width">
+            <mat-label>Authority</mat-label>
+            <mat-select name="role" formControlName="role" [(ngModel)]="user.is_superuser">
+              <mat-option *ngFor="let role of roleList" [(value)]="role.id">
+                {{role.value}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="registerForm.controls['role'].errors">
+              <span>role is required</span>
+            </mat-error>
+          </mat-form-field>
+        </td>
+
+        <td>
+          <div class="full-width">
+            <button mat-raised-button color="primary" type="submit" [disabled]="!registerForm.valid" (click)="save()">
+              <fa name="fas fa-save"></fa>
+              Save
+            </button>
+            <button mat-raised-button color="warn" type="button" (click)="cancel()">
+              <fa name="fas fa-undo"></fa>
+              Cancel
+            </button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+</mat-dialog-content>
+<!-- </mat-card> -->

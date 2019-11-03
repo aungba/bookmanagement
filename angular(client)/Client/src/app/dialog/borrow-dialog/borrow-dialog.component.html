@@ -1,0 +1,45 @@
+<span class="close_btn">
+  <fa name="far fa-window-close" size="2x" class="close" (click)="closeDialog()"></fa>
+</span>
+<h3 mat-dialog-title>Book Borrow</h3>
+<mat-dialog-content>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="title" [(ngModel)]= "book.title" readonly>
+  </mat-form-field>
+  <mat-form-field class="full-width" *ngIf="book.status">
+    <mat-select placeholder="username" [(ngModel)]="user" [formControl]="userControl">
+      <mat-option *ngFor="let user of userList" [value]="user.id">
+        {{user.username}}
+      </mat-option>
+    </mat-select>
+    <mat-error *ngIf="userControl.invalid">
+      <span> Username is required</span>
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="full-width" *ngIf="!book.status">
+    <input matInput placeholder="username" [(ngModel)]="username" name="username" readonly>
+  </mat-form-field>
+
+  <div class="full-width" *ngIf="book.status">
+    <button mat-raised-button class="save-btn" type="submit" [disabled]="userControl.invalid" (click)="save()">
+      <fa name="fas fa-save"></fa>
+      Borrow
+    </button>
+    <button mat-raised-button color="warn" type="button" (click)="cancel()">
+      <fa name="fas fa-undo"></fa>
+      Cancel
+    </button>
+  </div>
+
+  <div class="full-width" *ngIf="!book.status">
+    <button mat-raised-button class="save-btn" type="submit" (click)="save()">
+      <fa name="fas fa-save"></fa>
+      Return
+    </button>
+    <button mat-raised-button color="warn" type="button" (click)="cancel()">
+      <fa name="fas fa-undo"></fa>
+      Cancel
+    </button>
+  </div>
+</mat-dialog-content>

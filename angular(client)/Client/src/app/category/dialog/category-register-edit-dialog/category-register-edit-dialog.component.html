@@ -1,0 +1,24 @@
+<span class="close_btn">
+  <fa name="far fa-window-close" size="2x" class="close" (click)="closeDialog()"></fa>
+</span>
+<h3 mat-dialog-title>{{title}}</h3>
+<mat-dialog-content>
+  <mat-form-field class="full-width">
+    <input matInput placeholder="name" [(ngModel)]="category.category_txt" name="category"
+    [formControl]="categoryControl" [readonly]="isReadOnly">
+    <mat-error *ngIf="categoryControl.invalid">
+      <span>Category name is required</span>
+    </mat-error>
+  </mat-form-field>
+
+  <div class="full-width">
+    <button mat-raised-button class="save-btn" type="submit" [disabled]="categoryControl.invalid" (click)="save()">
+      <fa name="fas fa-save"></fa>
+      {{saveBtn}}
+    </button>
+    <button mat-raised-button color="warn" type="button" (click)="cancel()">
+      <fa name="fas fa-undo"></fa>
+      {{cancelBtn}}
+    </button>
+  </div>
+</mat-dialog-content>

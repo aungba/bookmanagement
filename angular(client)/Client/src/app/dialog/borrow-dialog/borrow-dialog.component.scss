@@ -1,0 +1,16 @@
+.full-width {
+    width: 80%;
+}
+
+.save-btn {
+    background-color: #673ab7;
+    color: white;
+    margin-right: 10px;
+}
+
+.save-btn[disabled] {
+    background-color: #673ab75e;
+    color: white;
+    cursor: not-allowed;
+    margin-right: 10px; 
+}

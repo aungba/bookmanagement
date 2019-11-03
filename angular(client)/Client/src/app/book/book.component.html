@@ -1,0 +1,119 @@
+<button mat-raised-button color="primary" class="reg-btn" (click)="register()">Register</button>
+<mat-accordion>
+  <mat-expansion-panel class="exp-panel">
+    <mat-expansion-panel-header>
+      <mat-panel-title>
+          <span class="fa fa-search"></span>
+        Search
+      </mat-panel-title>
+    </mat-expansion-panel-header>
+
+
+    <mat-form-field class="search_item">
+      <input matInput placeholder="title" [(ngModel)]="title" name="title">
+    </mat-form-field>
+    <mat-form-field class="search_item">
+      <input matInput placeholder="author" [(ngModel)]="author" name="author">
+    </mat-form-field>
+    <mat-form-field class="search_item">
+      <input matInput placeholder="publisher" [(ngModel)]="publisher" name="publisher">
+    </mat-form-field>
+
+    <mat-form-field class="search_item">
+      <mat-select placeholder="category" [(ngModel)]="category_id">
+        <mat-option *ngFor="let item of categoryList" [value]="item.id">
+          {{item.category_txt}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="search_item">
+      <mat-select placeholder="rent status" [(ngModel)]="rent_status">
+        <mat-option *ngFor="let item of rentalStatusList" [value]="item.id">
+          {{item.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field class="search_item">
+      <mat-select placeholder="book status" [(ngModel)]="book_status">
+        <mat-option *ngFor="let item of bookStatusList" [value]="item.id">
+          {{item.value}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <button mat-raised-button class="tbl-btn" (click)="search()">Search</button>
+    <button mat-raised-button class="tbl-btn" (click)="resetSearch()">Reset</button>
+    <mat-slide-toggle [(ngModel)]="autoRenew" (click)="toggleClick($event)">Over Due Date</mat-slide-toggle>
+  </mat-expansion-panel>
+</mat-accordion>
+
+<mat-card class="tbl-card">
+  <mat-table [dataSource]="dataSource" matSort>
+    <ng-container matColumnDef="id">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>No.</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.book_id}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="title">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Title</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.title}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="author">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Author</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.author}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="publisher">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Publisher</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.publisher}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="category">
+      <mat-header-cell *matHeaderCellDef mat-sort-header>Category</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{getCategoryText(element.category.category_id)}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="release_date">
+      <mat-header-cell *matHeaderCellDef>Release Date</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.release_date}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <mat-header-cell *matHeaderCellDef>Rental Staus</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.status ? 'Available' : 'OnLoan'}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="rent">
+      <mat-header-cell *matHeaderCellDef>Rental Date</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.rent_date}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="available">
+      <mat-header-cell *matHeaderCellDef>Book Status</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.isAvailable}}</mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="operation">
+      <mat-header-cell *matHeaderCellDef>Operation</mat-header-cell>
+      <mat-cell *matCellDef="let element">
+        <div *ngIf="element.status" class="div-btn">
+          <button mat-raised-button class="tbl-btn" (click)="edit(element.book_id)" matTooltip="edit"  [matTooltipPosition]="'above'"><span class="fa fa-edit fa-2x" matPrefix></span></button>
+          <button mat-raised-button class="tbl-btn" (click)="borrow(element.book_id,true)" [disabled]="element.isAvailable === 'Closed'" matTooltip="borrow" [matTooltipPosition]="'above'"><span class="fa fa-book fa-2x" matPrefix></span></button>
+          <button mat-raised-button class="tbl-btn" (click)="delete(element.book_id)" matTooltip="delete" [matTooltipPosition]="'above'"><span class="fa fa-trash fa-2x" matPrefix></span></button>
+        </div>
+        <div *ngIf="!element.status" class="div-btn">
+          <button mat-raised-button class="tbl-btn" disabled matTooltip="edit" [matTooltipPosition]="'above'"> <span class="fa fa-edit fa-2x" matPrefix></span></button>
+          <button mat-raised-button class="tbl-btn" (click)="borrow(element.book_id, false)" matTooltip="return" [matTooltipPosition]="'above'"><span class="fa fa-reply fa-2x" matPrefix></span></button>
+          <button mat-raised-button class="tbl-btn" disabled matTooltip="delete" [matTooltipPosition]="'above'"><span class="fa fa-trash fa-2x" matPrefix></span></button>
+        </div>
+      </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let element; columns: displayedColumns"></mat-row>
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</mat-card>

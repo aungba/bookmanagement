@@ -1,0 +1,35 @@
+<div class="app_containter">
+  <div class="header">
+    <h3>Book Management System</h3>
+  </div>
+
+  <mat-drawer-container class="example-container">
+    <mat-drawer mode="side" opened>
+      <div class="user-icon">
+          <fa name="fas fa-user-circle" size="5x" class="user"></fa>
+          <h4>{{user_name}}</h4>
+          <button mat-button (click)="logout()">Logout</button>
+      </div>
+      <div class="white-space"></div>
+      <button mat-button class="menu-item" (click)="goBook()">
+          <fa name="fas fa-book" size="2x"></fa>
+        Book
+      </button>
+      <div class="white-space"></div>
+      <button mat-button class="menu-item" (click)="goCategory()">
+        Category
+      </button>
+      <div class="white-space"></div>
+      <div class="pos-btn">
+      <div class="white-space"></div>
+      <button mat-button class="menu-item" (click)="logout()">
+        Logout
+      </button>
+    </div>
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+  </mat-drawer-container>
+
+</div>

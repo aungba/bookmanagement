@@ -1,0 +1,106 @@
+
+.mat-dialog-container {
+    padding: 0;
+}
+
+.search_item {
+    margin-right: 20px;
+}
+
+mat-header-cell.mat-header-cell.cdk-column-id.mat-column-id.ng-star-inserted {
+    max-width: 40px;
+    margin-right: 3px;
+}
+
+mat-cell.mat-cell.cdk-column-id.mat-column-id.ng-star-inserted {
+    max-width: 40px;
+    margin-right: 3px;
+}
+
+mat-header-cell.mat-header-cell.cdk-column-title.mat-column-title.ng-star-inserted{
+    max-width: 160px;
+}
+
+
+mat-header-cell.mat-header-cell.cdk-column-author.mat-column-author.ng-star-inserted, {
+    max-width: 140px;
+}
+
+mat-header-cell.mat-header-cell.cdk-column-release_date.mat-column-release_date.ng-star-inserted,
+mat-header-cell.mat-header-cell.cdk-column-available.mat-column-available.ng-star-inserted,
+mat-header-cell.mat-header-cell.cdk-column-status.mat-column-status.ng-star-inserted,
+mat-header-cell.mat-header-cell.cdk-column-rent.mat-column-rent.ng-star-inserted
+{
+    max-width: 90px;
+    margin-right: 5px;
+}
+
+mat-header-cell.mat-header-cell.cdk-column-operation.mat-column-operation.ng-star-inserted {
+    max-width: 251px;
+}
+
+mat-header-cell.mat-header-cell.cdk-column-category.mat-column-category.ng-star-inserted,
+mat-header-cell.mat-header-cell.cdk-column-publisher.mat-column-publisher.ng-star-inserted {
+    max-width: 100px;
+    margin-right: 5px;
+}
+
+mat-cell.mat-cell.cdk-column-title.mat-column-title.ng-star-inserted{
+    max-width: 160px;
+}
+
+mat-cell.mat-cell.cdk-column-author.mat-column-author.ng-star-inserted
+{
+    max-width: 140px;
+}
+
+mat-cell.mat-cell.cdk-column-release_date.mat-column-release_date.ng-star-inserted,
+mat-cell.mat-cell.cdk-column-available.mat-column-available.ng-star-inserted,
+mat-cell.mat-cell.cdk-column-status.mat-column-status.ng-star-inserted,
+mat-cell.mat-cell.cdk-column-rent.mat-column-rent.ng-star-inserted
+{
+    max-width: 90px;
+    margin-right: 5px;
+}
+
+mat-cell.mat-cell.cdk-column-operation.mat-column-operation.ng-star-inserted {
+    max-width: 251px;
+}
+
+mat-cell.mat-cell.cdk-column-category.mat-column-category.ng-star-inserted,
+mat-cell.mat-cell.cdk-column-publisher.mat-column-publisher.ng-star-inserted {
+    max-width: 100px;
+    margin-right: 5px;
+}
+
+.tbl-btn {
+    background-color: #673ab7;
+    color: white;
+    margin-right: 10px;
+}
+
+.tbl-btn[disabled] {
+    background-color: #673ab75e;
+    color: white;
+    cursor: not-allowed;
+    margin-right: 10px; 
+}
+
+.exp-panel {
+    width: 50%;
+    // float: left;
+}
+
+.div-btn {
+    width: 251px;
+    min-width: max-content;
+}
+
+.tbl-card {
+    margin-top: 20px;
+}
+
+.reg-btn {
+    margin-top: 7px;
+    margin-bottom: 7px;
+}

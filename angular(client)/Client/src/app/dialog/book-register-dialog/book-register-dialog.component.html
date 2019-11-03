@@ -1,0 +1,105 @@
+<span class="close-btn">
+  <fa name="far fa-window-close" size="2x" class="close" (click)="closeDialog()"></fa>
+</span>
+<h3 mat-dialog-title>Book Register</h3>
+<mat-dialog-content>
+  <form [formGroup]="bookForm" (ngSubmit)="save()">
+    <table>
+      <tr>
+        <td class="vertical-line">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="title" formControlName="title" [(ngModel)]="book.title" name="title">
+            <mat-error *ngIf="bookForm.controls['title'].errors">
+              <span>Title is required</span>
+            </mat-error>
+          </mat-form-field>
+          </td>
+          <td>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="author" formControlName="author" [(ngModel)]="book.author" name="author">
+            <mat-error *ngIf="bookForm.get('author').hasError('required')">
+              <span> Author is required</span>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="vertical-line">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="publisher" formControlName="publisher" [(ngModel)]="book.publisher">
+            <mat-error *ngIf="bookForm.get('publisher').hasError('required')">
+              <span> Publisher is required</span>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <div class="full-width">
+              <label>Status :</label>
+              <mat-radio-group [(ngModel)]="book.isAvailable" name="gender" formControlName="isAvailable">
+                <mat-radio-button *ngFor="let status of statusList" [value]="status.id" >
+                  {{status.value}}
+                </mat-radio-button>
+              </mat-radio-group>
+              <mat-error *ngIf="bookForm.get('isAvailable').hasError('required')">
+                <span>Status is required</span>
+              </mat-error>
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td class="vertical-line">
+          <mat-form-field class="full-width">
+            <input matInput placeholder="release date" id="release" formControlName="releaseDate" [(ngModel)]="book.release_date">
+            <mat-error *ngIf="bookForm.get('releaseDate').hasError('required')">
+              <span> Release date is required</span>
+            </mat-error>
+          </mat-form-field>
+        </td>
+        <td>
+          <mat-form-field class="full-width">
+            <!-- <input matInput placeholder="category" formControlName="category" ([ngModel])="book.category">
+            <mat-error *ngIf="bookForm.get('category').hasError('required')">
+              <span> Category is required</span>
+            </mat-error> -->
+            <mat-select placeholder="category" formControlName="category" [(ngModel)]="book.category.category_id" >
+              <mat-option *ngFor="let item of categoryList" [value]="item.category_id">
+                {{item.category_txt}}
+              </mat-option>
+            </mat-select>
+            <mat-error *ngIf="bookForm.get('category').hasError('required')">
+              <span> Category is required</span>
+            </mat-error>
+          </mat-form-field>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2" class="full-wdith">
+          <mat-form-field class="full-width">
+            <textarea matInput placeholder="summary" formControlName="summary" [(ngModel)]="book.summary">
+              <mat-error *ngIf="bookForm.get('summary').hasError('required')">
+                <span> Summary is required</span>
+              </mat-error>
+            </textarea>
+          </mat-form-field>
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          <div class="full-width">
+            <button mat-raised-button class="save-btn" type="submit" [disabled]="!bookForm.valid" (click)="save()">
+              <fa name="fas fa-save"></fa>
+              Save
+            </button>
+            <button mat-raised-button color="warn" type="button" (click)="cancel()">
+              <fa name="fas fa-undo"></fa>
+              Cancel
+            </button>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </form>
+</mat-dialog-content>

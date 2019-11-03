@@ -1,0 +1,29 @@
+<span>
+  <fa name="far fa-window-close" size="2x" class="close" (click)="closeDialog()"></fa>
+</span>
+<h3 mat-dialog-title>Book Delete</h3>
+<div *ngIf="errorMessage" class="error-msg">
+    <fa name="fas fa-times-circle"></fa>
+    <span>{{errorMessage}}</span>
+  </div>
+<mat-dialog-content>
+  <form name="form" #deleteForm="ngForm">
+    <mat-form-field class="full-width">
+        <mat-label>Id</mat-label>
+        <input matInput [value]="book.id" readonly>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="title" name="title" [(ngModel)]="book_title" required #bookTitle="ngModel">
+      <mat-error *ngIf="bookTitle.errors?.required">
+        <span>Title is required</span>
+      </mat-error>
+    </mat-form-field>
+
+    <div class="full-width">
+        <button mat-raised-button class="delete-btn" type="submit" (click)="delete()" [disabled]="deleteForm.form.invalid">
+            <fa name="fas fa-trash"></fa>
+            Delete
+          </button>
+    </div>
+  </form>
+</mat-dialog-content>
