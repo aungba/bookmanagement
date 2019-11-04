@@ -63,10 +63,10 @@
 		where book_id = #{book_id}
 	</update>
 
-	<delete id="deleteBook" parameterType="int">
+	<delete id="deleteBook" parameterType="com.bookmanagement.entity.Book">
 		delete from book where
 		book_id
-		= #{book_id} and isAvailable = #{isAvailable}
+		= #{book_id} and status = #{book_status}
 	</delete>
 
 	<update id="updateBookState"
@@ -102,7 +102,7 @@
 				and B.category_id = #{book.category.category_id}
 			</if>
 			<if test="book_status != null">
-				and B.status = #{status}
+				and B.status = #{book_status}
 			</if>
 			<if test="book.isAvailable != null">
 				and B.isAvailable = #{book.isAvailable}

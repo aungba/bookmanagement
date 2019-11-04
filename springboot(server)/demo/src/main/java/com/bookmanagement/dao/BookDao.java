@@ -46,7 +46,7 @@ public interface BookDao {
 	 * @param book_id book_id
 	 * @return 0 or 1
 	 */
-	int updateBook(Book book, int book_id);
+	int updateBook(Book book);
 
 	/**
 	 * This method is used to delete the book with book_id and status
@@ -55,7 +55,7 @@ public interface BookDao {
 	 * @param isAvailable isAvailable
 	 * @return 0 or 1
 	 */
-	int deleteBook(@Param("book_id") int book_id, @Param("isAvailable") String isAvailable);
+	int deleteBook(@Param("book_id") int book_id, @Param("book_status") Boolean isAvailable);
 
 	/**
 	 * This method is used to update the book_status

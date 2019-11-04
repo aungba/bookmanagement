@@ -56,7 +56,7 @@ public class BookServiceTest {
 	@Test
 	public void testDeleteBook_normal() {
 		int expected_result = 1;
-		doReturn(expected_result).when(bookDao).deleteBook(1, "isAvailable");
+		doReturn(expected_result).when(bookDao).deleteBook(1, true);
 		
 		int actual_result = bookService.deleteBook(1);
 		assertThat(actual_result).isEqualTo(expected_result);
@@ -69,7 +69,7 @@ public class BookServiceTest {
 		
 		Category category = new Category(1, "test");
 		Book book = new Book(2,"test","test","test","testing",java.sql.Date.valueOf(this.dateUtil.formatDate(this.dateUtil.getCurrentDate())), true, "isAvailable", category, java.sql.Date.valueOf(this.dateUtil.formatDate(this.dateUtil.getCurrentDate())));
-		doReturn(expected_result).when(bookDao).updateBook(book, book_id);
+		doReturn(expected_result).when(bookDao).updateBook(book);
 		
 		int actual_result = bookService.updateBook(book, book_id);
 		assertThat(actual_result).isEqualTo(expected_result);

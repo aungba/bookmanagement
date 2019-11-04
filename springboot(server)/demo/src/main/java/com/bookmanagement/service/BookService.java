@@ -60,7 +60,8 @@ public class BookService {
 	 * @return 0 or 1
 	 */
 	public int updateBook(Book book, int book_id) {
-		return this.bookDao.updateBook(book, book_id);
+		book.setBook_id(book_id);
+		return this.bookDao.updateBook(book);
 	}
 
 	/**
@@ -70,7 +71,7 @@ public class BookService {
 	 * @return 0 or 1
 	 */
 	public int deleteBook(int id) {
-		return this.bookDao.deleteBook(id, "isAvailable");
+		return this.bookDao.deleteBook(id, true);
 
 	}
 
