@@ -4,7 +4,7 @@
 * Simple book management application using angular, spring boot and nginx with JWT authentication.
 
 ### Client(Angular) ###
-* Angular 7 + Angular material
+* Angular 8 + Angular material
   #### Env Set up ###
   * IDE - Vistudio Studio Code
   * intall node.js latest version
