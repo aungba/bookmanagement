@@ -21,7 +21,7 @@
 
     <mat-form-field class="search_item">
       <mat-select placeholder="category" [(ngModel)]="category_id">
-        <mat-option *ngFor="let item of categoryList" [value]="item.id">
+        <mat-option *ngFor="let item of categoryList" [value]="item.category_id">
           {{item.category_txt}}
         </mat-option>
       </mat-select>

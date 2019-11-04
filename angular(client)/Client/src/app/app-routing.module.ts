@@ -9,7 +9,7 @@ const routes: Routes = [
   // {path: 'book', loadChildren: '@app/book/book.module#BookModule'},
 
   // {path: 'user', loadChildren: '@app/user/user.module#UserModule'},
-  {path: '#', loadChildren: '@app/side-menu/side-menu.module#SideMenuModule', canActivate: [AuthGuard]}
+  {path: '#', loadChildren: () => import('@app/side-menu/side-menu.module').then(m => m.SideMenuModule), canActivate: [AuthGuard]}
 ];
 
 @NgModule({

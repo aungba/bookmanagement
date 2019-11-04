@@ -1,5 +1,9 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource, MatDialog, MatSlideToggleChange } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSlideToggleChange } from '@angular/material/slide-toggle';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { ErrorDialogComponent } from '@app/dialog/error-dialog/error-dialog.component';
 import { User } from '@app/entity/user';
@@ -22,8 +26,8 @@ export class BookComponent implements OnInit {
   displayedColumns: string[] = ['id', 'title', 'author', 'publisher', 'category', 'release_date', 'status', 'available', 'rent',
     'operation'];
   dataSource: MatTableDataSource<Book>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
   user: User;
   userList: User[];
   categoryList: Category[];
@@ -31,7 +35,7 @@ export class BookComponent implements OnInit {
   title: string;
   author: string;
   publisher: string;
-  category_id: number;
+  category_id: String;
   rent_status: boolean | string;
   book_status: string;
   autoRenew: Boolean;
@@ -227,7 +231,7 @@ export class BookComponent implements OnInit {
 
   search() {
     const query = this.generateQuery(this.title, this.author, this.publisher,
-      this.category_id, this.rent_status, this.book_status);
+      Number(this.category_id), this.rent_status, this.book_status);
     this.getBookList(query);
   }
 
@@ -235,7 +239,7 @@ export class BookComponent implements OnInit {
     this.title = '';
     this.author = '';
     this.publisher = '';
-    this.category_id = 0;
+    this.category_id = '';
     this.rent_status = '';
     this.book_status = '';
     this.search();

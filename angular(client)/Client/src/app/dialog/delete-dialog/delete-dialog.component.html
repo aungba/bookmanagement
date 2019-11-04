@@ -10,7 +10,7 @@
   <form name="form" #deleteForm="ngForm">
     <mat-form-field class="full-width">
         <mat-label>Id</mat-label>
-        <input matInput [value]="book.id" readonly>
+        <input matInput [value]="book.book_id" readonly>
     </mat-form-field>
     <mat-form-field class="full-width">
       <input matInput placeholder="title" name="title" [(ngModel)]="book_title" required #bookTitle="ngModel">

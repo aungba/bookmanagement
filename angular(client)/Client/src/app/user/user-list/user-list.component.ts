@@ -1,5 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { User } from '@entity/user';
 import { AuthService } from '@service/auth.service';
 import { UserRegisterDialogComponent } from '@app/dialog/user-register-dialog/user-register-dialog.component';
@@ -14,8 +17,8 @@ export class UserListComponent implements OnInit {
   user: User;
 
   dataSource: MatTableDataSource<User>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
 
   constructor(
     private authService: AuthService,

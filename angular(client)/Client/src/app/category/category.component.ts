@@ -1,6 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { MatPaginator, MatSort, MatTableDataSource, MatDialog } from '@angular/material';
+import { MatDialog } from '@angular/material/dialog';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+import { MatTableDataSource } from '@angular/material/table';
 import { Category } from '@app/entity/category';
 import { CategoryService } from '@service/category.service';
 import { AuthService } from '@service/auth.service';
@@ -17,8 +20,8 @@ import { ErrorDialogComponent } from '@app/dialog/error-dialog/error-dialog.comp
 export class CategoryComponent implements OnInit {
   displayedColumns: string[] = ['id', 'category', 'operation'];
   dataSource: MatTableDataSource<Category>;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
   category: Category;
   categoryList: Category[];
 

@@ -6,9 +6,9 @@ import { AuthGuard } from '@app/guard/auth.guard';
 const routes: Routes = [
   {path: '', component: SideMenuComponent,
   children: [
-  {path: 'user', loadChildren: '@app/user/user.module#UserModule' ,canActivate: [AuthGuard]},
-  {path: 'category', loadChildren: '@app/category/category.module#CategoryModule', canActivate: [AuthGuard]},
-  {path: 'book', loadChildren: '@app/book/book.module#BookModule', canActivate: [AuthGuard]}
+  {path: 'user', loadChildren: () => import('@app/user/user.module').then(m => m.UserModule) ,canActivate: [AuthGuard]},
+  {path: 'category', loadChildren: () => import('@app/category/category.module').then(m => m.CategoryModule), canActivate: [AuthGuard]},
+  {path: 'book', loadChildren: () => import('@app/book/book.module').then(m => m.BookModule), canActivate: [AuthGuard]}
   ]}
 ];
 
